@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { User, Lock } from 'lucide-react';
 import { FiUser } from 'react-icons/fi'; 
@@ -9,10 +10,22 @@ import { MdLock } from 'react-icons/md';
 export default function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validUsername = "1234";
+  const validPassword = "1234";
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login attempted with:', username, password);
+
+    // Verifica si el usuario y contraseña son correctos
+    if (username === validUsername && password === validPassword) {
+      console.log('Login exitoso');
+      router.push('/Autoevaluacion');  // Redirige a Autoevaluacion/page si el login es correcto
+    } else {
+      console.log('Usuario o contraseña incorrectos');
+      alert('Usuario o contraseña incorrectos');
+    }
   };
 
   return (

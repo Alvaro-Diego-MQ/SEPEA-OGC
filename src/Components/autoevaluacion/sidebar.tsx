@@ -5,7 +5,7 @@ import Header from './header';
 
 export default function Sidebar() {
   return (
-    <aside className="bg-white-600 shadow-md h-screen w-64 left-0 top-0 flex flex-col items-center border-r-2 border-{#D2D6DE}">
+    <aside className="bg-[#ffff] shadow-md h-screen w-64 left-0 top-0 flex flex-col items-center border-r-2 border-{#D2D6DE}">
       <div className="p-4">
         <Image
           src="/logo_ogc.png"

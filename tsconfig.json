@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/Components/autoevaluacion/sidebar.jsx", "src/Components/autoevaluacion/sidebar.jsx"  ],
   "exclude": [
     "node_modules"
   ]
