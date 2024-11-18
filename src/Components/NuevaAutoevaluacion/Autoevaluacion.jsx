@@ -63,7 +63,7 @@ const NewAssessment = () => {
 const SelectEvent = () => {
   return (
     <div>
-      <h2 className="text-xl font-bold mb-2">Seleccionar Event</h2>
+      <h2 className="text-xl font-bold mb-2">Seleccionar Evento</h2>
       {/* Contenido del paso "Seleccionar Evento" */}
       <select className="border rounded-md px-4 py-2 w-full">
         <option>Seleccione</option>

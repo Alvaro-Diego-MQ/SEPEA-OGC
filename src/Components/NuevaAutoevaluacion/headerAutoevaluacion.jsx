@@ -3,7 +3,7 @@ import { Bell, Mail } from 'lucide-react';
 import Image from 'next/image';
 
 
-export default function HeaderAutoevaluacion() {
+export default function HeaderAutoevaluacion({ escuelaSeleccionada }) {
     
     return (
       <header className=" flex ">
@@ -18,7 +18,15 @@ export default function HeaderAutoevaluacion() {
         </div>
         <div className='flex justify-between bg-blue-600 text-white p-4 w-full'>
         <nav className="text-sm mb-4">
-        <a href="#" className="text-xl font-semibold">Oficina de Gestión de Calidad</a> &gt;&gt; <a href="#" className="text-xl font-semibold">Trámites</a>
+          <a href="#" className="text-xl font-semibold">
+            Oficina de Gestión de Calidad
+          </a>
+          {escuelaSeleccionada && (
+            <>
+              <span className="text-xl font-semibold"> - </span>
+              <span className="text-xl font-semibold">{escuelaSeleccionada}</span>
+            </>
+          )}
         </nav>
         
        <div className='flex items-center space-x-6'> 

@@ -3,21 +3,38 @@ import Sidebar from './sidebar'
 import Header from './header'
 import React, { useState } from 'react';
 import Button from '../ui/button'
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
 
 export default function () {
+  const [escuelaSeleccionada, setEscuelaSeleccionada] = useState('');
+  const router = useRouter();
+
+  const handleSiguiente = () => {
+    // Cuando el usuario haga clic en "Siguiente", redirigimos a la página deseada
+    if (escuelaSeleccionada) {
+      router.push(`/NuevaAutoevaluacion?escuela=${encodeURIComponent(escuelaSeleccionada)}`);
+    } else {
+      alert("Por favor, seleccione una escuela primero.");
+    }
+  };
+
   return (
     <div className='flex flex-row items-start bg-[#D2D6DE]'>
         <Sidebar/>
       <div className='flex flex-col w-full'>
-        <Header/>
+        <Header escuelaSeleccionada={escuelaSeleccionada}/>
       
         <div className="flex flex-col mt-2 bg-white py-4 border-b border-gray-200">
         <h1 className="text-center text-lg font-bold text-gray-800 px-4">
           BIENVENIDOS AL SISTEMA DE EVALUACION DE PROGRAMAS DE ESTUDIO PARA LA ACREDITACION
         </h1>
         </div>
-        <FormularioSeleccion/>
+        <FormularioSeleccion setEscuelaSeleccionada={setEscuelaSeleccionada}/>
+        
       </div>
+      
       
       <Footer/>
       
@@ -29,6 +46,15 @@ export default function () {
 export function FormularioSeleccion() {
   const [escuelaSeleccionada, setEscuelaSeleccionada] = useState('');
   const [modeloSeleccionado, setModeloSeleccionado] = useState('');
+  const router = useRouter();
+  const handleSiguiente = () => {
+    if (escuelaSeleccionada) {
+      // Redirige a la página NuevaAutoevaluacion pasando el parámetro de la escuela
+      router.push(`/NuevaAutoevaluacion?escuela=${encodeURIComponent(escuelaSeleccionada)}`);
+    } else {
+      alert("Por favor, seleccione una escuela primero.");
+    }
+  };
 
   const escuelas = [
     'Ingenieria Agronomica',
@@ -83,13 +109,12 @@ export function FormularioSeleccion() {
   return (
     <div className="w-full mt-4 h-48 mx-auto p-4 bg-white">
       <div className="flex items-center max-w-[600px] space-x-6 bg-white">
-        <div className="">
+        <div>
           <label htmlFor="escuela" className="block text-sm font-medium text-black mb-1">
-            Seleccione la Escuela Profesiona
+            Seleccione la Escuela Profesional
           </label>
           <select
             id="escuela"
-            value={escuelaSeleccionada}
             onChange={(e) => setEscuelaSeleccionada(e.target.value)}
             className="w-full bg-white-500 text-black border border-blue-500 rounded-md py-2 px-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
           >
@@ -120,9 +145,10 @@ export function FormularioSeleccion() {
           </select>
         </div>
         <div>
-          <Button/>
-            
+          <Button onClick={handleSiguiente}/>
+           
         </div>
+        
       </div>
     </div>
   );
