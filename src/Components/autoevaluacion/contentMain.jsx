@@ -8,37 +8,22 @@ import { useRouter } from 'next/navigation';
 
 
 export default function () {
-  const [escuelaSeleccionada, setEscuelaSeleccionada] = useState('');
-  const router = useRouter();
-
-  const handleSiguiente = () => {
-    // Cuando el usuario haga clic en "Siguiente", redirigimos a la página deseada
-    if (escuelaSeleccionada) {
-      router.push(`/NuevaAutoevaluacion?escuela=${encodeURIComponent(escuelaSeleccionada)}`);
-    } else {
-      alert("Por favor, seleccione una escuela primero.");
-    }
-  };
-
+  
   return (
     <div className='flex flex-row items-start bg-[#D2D6DE]'>
         <Sidebar/>
       <div className='flex flex-col w-full'>
-        <Header escuelaSeleccionada={escuelaSeleccionada}/>
+        <Header />
       
         <div className="flex flex-col mt-2 bg-white py-4 border-b border-gray-200">
         <h1 className="text-center text-lg font-bold text-gray-800 px-4">
           BIENVENIDOS AL SISTEMA DE EVALUACION DE PROGRAMAS DE ESTUDIO PARA LA ACREDITACION
         </h1>
         </div>
-        <FormularioSeleccion setEscuelaSeleccionada={setEscuelaSeleccionada}/>
+        <FormularioSeleccion/>
         
       </div>
-      
-      
-      <Footer/>
-      
-      
+      <Footer/>    
     </div>
   )
 }
