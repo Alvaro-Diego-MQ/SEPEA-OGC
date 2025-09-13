@@ -55,7 +55,7 @@ Asegúrate de tener instalado lo siguiente:
 4.  **Configura las variables de entorno:**
     Crea una copia del archivo `.env.example` y renómbrala a `.env.local`.
     ```bash
-    cp .env.example .env.local
+    env.example .env.local
     ```
     Luego, rellena las variables necesarias en el archivo `.env.local` (ej. claves de API, URL de la base de datos, etc.).
 
