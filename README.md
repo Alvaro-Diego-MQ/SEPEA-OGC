@@ -50,8 +50,6 @@ Asegúrate de tener instalado lo siguiente:
 3.  **Instala las dependencias:**
     ```bash
     npm install
-    # o si usas yarn:
-    # yarn install
     ```
 
 4.  **Configura las variables de entorno:**
