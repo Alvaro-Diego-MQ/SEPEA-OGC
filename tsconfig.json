@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -21,17 +17,18 @@
         "name": "next"
       }
     ],
-    "target": "ES2017"
+    "target": "ES2017",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/Components/autoevaluacion/sidebar.jsx",
-    "src/Components/autoevaluacion/sidebar.jsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "src/components/autoevaluacion/sidebar.jsx"
+, "src/app/layout.js"  ],
+  "exclude": ["node_modules"]
 }

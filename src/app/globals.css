@@ -1,3 +1,44 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* src/app/globals.css */
+
+@import "tailwindcss"; /* Esta línea importa todo lo que necesitas de Tailwind v4 */
+
+/* Variables CSS globales (Todo esto está perfecto y se queda igual) */
+:root {
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  --color-background: #f0f4f8;        /* Fondo claro */
+  --color-foreground: #0f172a;        /* Texto oscuro */
+  --color-card: #ffffff;
+  /* ... el resto de tus variables ... */
+}
+
+/* Dark mode */
+.dark {
+  --color-background: #0f172a;
+  /* ... el resto de tus variables de modo oscuro ... */
+}
+
+/* Animaciones de acordeón */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+/* Base */
+* {
+  border-radius: var(--radius-md);
+  outline-color: var(--color-ring);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: 'Inter', sans-serif;
+}
