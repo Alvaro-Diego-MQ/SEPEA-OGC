@@ -1,6 +1,6 @@
 # SEPEA - Sistema de Evaluación de Programas de Estudio para la Acreditación
 
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg) ![Tech Stack](https://img.shields.io/badge/tech-Next.js-black?logo=next.js) ![Styling](https://img.shields.io/badge/styling-TailwindCSS-38B2AC?logo=tailwind-css)
+![Tech Stack](https://img.shields.io/badge/tech-Next.js-black?logo=next.js) ![Styling](https://img.shields.io/badge/styling-TailwindCSS-38B2AC?logo=tailwind-css)
 
 SEPEA es una aplicación web moderna diseñada para gestionar y agilizar el proceso de evaluación y acreditación de programas de estudio en instituciones educativas. La plataforma facilita la recolección de datos, el seguimiento del progreso y la generación de reportes para los comités de acreditación.
 
@@ -39,12 +39,12 @@ Asegúrate de tener instalado lo siguiente:
 
 1.  **Clona el repositorio:**
     ```bash
-    git clone https://github.com/Alvaro-Diego-MQ/sepea.git
+    git clone https://github.com/Alvaro-Diego-MQ/SEPEA-OGC.git
     ```
 
 2.  **Navega al directorio del proyecto:**
     ```bash
-    cd sepea
+    cd SEPEA-OGC
     ```
 
 3.  **Instala las dependencias:**
