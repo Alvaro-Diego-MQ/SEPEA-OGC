@@ -20,7 +20,7 @@
     "target": "ES2017",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["src/*"]
     }
   },
   "include": [
@@ -29,6 +29,6 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/autoevaluacion/sidebar.jsx"
-, "src/app/layout.js"  ],
+, "src/app/layout.js", "tailwind.config.js"  ],
   "exclude": ["node_modules"]
 }

@@ -1,85 +1,156 @@
 "use client";
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { User, Lock } from 'lucide-react';
-import { FiUser } from 'react-icons/fi'; 
-import { MdLock } from 'react-icons/md';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { User, Lock, Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
+// 1. Define el esquema de validación con Zod
+const formSchema = z.object({
+  username: z.string().min(1, { message: 'El nombre de usuario es requerido.' }),
+  password: z.string().min(1, { message: 'La contraseña es requerida.' }),
+});
 
 export default function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
   const router = useRouter();
 
-  const validUsername = "1234";
-  const validPassword = "1234";
+  // 2. Configura el formulario con react-hook-form y Zod
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // 3. Maneja el envío del formulario
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+    setAuthError(null);
 
-    // Verifica si el usuario y contraseña son correctos
-    if (username === validUsername && password === validPassword) {
+    // Simula una llamada a la API
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const validUsername = "1234";
+    const validPassword = "1234";
+
+    if (values.username === validUsername && values.password === validPassword) {
       console.log('Login exitoso');
-      router.push('/Autoevaluacion');  // Redirige a Autoevaluacion/page si el login es correcto
+      router.push('/Autoevaluacion');
     } else {
       console.log('Usuario o contraseña incorrectos');
-      alert('Usuario o contraseña incorrectos');
+      setAuthError('Usuario o contraseña no válidos.');
     }
+    setIsLoading(false);
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
-      {/* Contenedor del formulario */}
-      <div className="md:w-2/4 bg-blue-50 p-8 flex flex-col justify-center" >
-        <div className="max-w-md mx-auto w-full p-8">
-          <img src="/logo_ogc.png" alt="OGC Logo" className="h-20 mb-8" />
-          <h2 className="text-2xl font-bold mb-2 text-center">Iniciar Sesión</h2>
-          <p className="text-[#009CDE] font-semibold text-sm mb-8 text-center text-[15px]">
-            Sistema de Evaluación de Programas de Estudio para la Acreditación
-          </p>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="USUARIO"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full pr-10 pl-3 py-2 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-[#009CDE] text-[13px] "
-                required
-              />
-              <FiUser className="absolute top-2.5 right-3 text-black-400" size={20}/>
-            </div>
+    <div className="flex flex-col md:flex-row h-screen bg-white">
+      {/* Contenedor del Formulario */}
+      <div className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12">
+        <div className="w-full max-w-md space-y-8">
+          {/* Encabezado */}
+          <div className="text-center">
+            <img src="/logo_ogc.png" alt="OGC Logo" className="h-24 mx-auto mb-6" />
+            <h1 className="text-3xl font-bold text-gray-900">Bienvenido de Nuevo</h1>
+            <p className="text-gray-500 mt-2">
+              Sistema de Evaluación de Programas de Estudio para la Acreditación
+            </p>
+          </div>
 
-            <div className="relative">
-              <input
-                type="password"
-                placeholder="CONTRASEÑA"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-3 pr-10 py-2 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 text-[13px]"
-                required
+          {/* Formulario */}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-700">Usuario</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                        <Input
+                          placeholder="Ingrese su usuario"
+                          className="pl-10 h-12 border-gray-300 focus:border-[#009CDE] focus:ring-[#009CDE]"
+                          {...field}
+                          disabled={isLoading}
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              <MdLock className="absolute top-2.5 right-3 text-black-400" size={20}/>
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-[#009CDE] text-white p-3 rounded font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-            >
-              INGRESAR
-            </button>
-          </form>
-          
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-700">Contraseña</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                        <Input
+                          type="password"
+                          placeholder="Ingrese su contraseña"
+                          className="pl-10 h-12 border-gray-300 focus:border-[#009CDE] focus:ring-[#009CDE]"
+                          {...field}
+                          disabled={isLoading}
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {authError && (
+                  <p className="text-sm font-medium text-red-600 text-center">{authError}</p>
+              )}
+
+              <Button type="submit" className="w-full bg-[#009CDE] hover:bg-blue-700 text-white font-bold py-3 text-base rounded-lg transition-colors duration-300" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    <span>Verificando...</span>
+                  </>
+                ) : (
+                  'INGRESAR'
+                )}
+              </Button>
+            </form>
+          </Form>
         </div>
       </div>
-      {/* Contenedor de la imagen */}
-      <div className="w-full md:w-2/4 relative" style={{width: '100%'}}>
+
+      {/* Contenedor de la Imagen */}
+      <div className="hidden md:block w-1/2 relative">
         <Image
           src="/unapuno.jpg"
           alt="Universidad Nacional del Altiplano"
           layout="fill"
           objectFit="cover"
+          priority
+          className="filter grayscale-[20%]"
         />
+        <div className="absolute inset-0 bg-black opacity-30"></div> {/* Superposición oscura para mejorar contraste */}
       </div>
     </div>
   );
