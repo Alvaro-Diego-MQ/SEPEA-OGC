@@ -1,41 +1,68 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SEPEA - Sistema de Evaluación de Programas de Estudio para la Acreditación
 
-## Getting Started
+![Tech Stack](https://img.shields.io/badge/tech-Next.js-black?logo=next.js) ![Styling](https://img.shields.io/badge/styling-TailwindCSS-38B2AC?logo=tailwind-css)
 
-First, run the development server:
+SEPEA es una aplicación web moderna diseñada para gestionar y agilizar el proceso de evaluación y acreditación de programas de estudio en instituciones educativas. La plataforma facilita la recolección de datos, el seguimiento del progreso y la generación de reportes para los comités de acreditación.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Características Principales
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-   **📋 Gestión de Evaluaciones:** Crea, asigna y da seguimiento a los procesos de evaluación de manera centralizada.
+-   **👥 Roles de Usuario:** Sistema de permisos diferenciados para administradores, evaluadores y coordinadores de programa.
+-   **📊 Generación de Reportes:** Exporta informes detallados y resúmenes ejecutivos sobre el estado de la acreditación.
+-   **🎨 Interfaz Moderna y Responsiva:** Desarrollada con las últimas tecnologías para una experiencia de usuario fluida en cualquier dispositivo.
+-   **🌙 Tema Claro y Oscuro:** Soporte nativo para adaptarse a las preferencias visuales del usuario.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🛠️ Stack Tecnológico
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Este proyecto está construido con un stack de tecnologías moderno y escalable:
 
-## Learn More
+-   **Framework:** [Next.js](https://nextjs.org/) 15+ (App Router)
+-   **Lenguaje:** [TypeScript](https://www.typescriptlang.org/)
+-   **Librería UI:** [React](https://reactjs.org/)
+-   **Estilos:** [Tailwind CSS](https://tailwindcss.com/) v4
+-   **Componentes:** [Shadcn/ui](https://ui.shadcn.com/) y Radix UI
+-   **Gestión de Formularios:** [React Hook Form](https://react-hook-form.com/)
+-   **Validación de Esquemas:** [Zod](https://zod.dev/)
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Puesta en Marcha (Getting Started)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Sigue estos pasos para ejecutar una copia local del proyecto.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Pre-requisitos
 
-## Deploy on Vercel
+Asegúrate de tener instalado lo siguiente:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-   Node.js (v18.x o superior)
+-   npm, yarn, o pnpm
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-=======
-# SEPEA
-Sistema de Evaluacion de Programas de Estudio para la Acreditacion
->>>>>>> 64be3e339408caaff16bd50129b5edbeff4ae9a2
+### Instalación
+
+1.  **Clona el repositorio:**
+    ```bash
+    git clone https://github.com/Alvaro-Diego-MQ/SEPEA-OGC.git
+    ```
+
+2.  **Navega al directorio del proyecto:**
+    ```bash
+    cd SEPEA-OGC
+    ```
+
+3.  **Instala las dependencias:**
+    ```bash
+    npm install
+    ```
+
+4.  **Configura las variables de entorno:**
+    Crea una copia del archivo `.env.example` y renómbrala a `.env.local`.
+    ```bash
+    env.example .env.local
+    ```
+    Luego, rellena las variables necesarias en el archivo `.env.local` (ej. claves de API, URL de la base de datos, etc.).
+
+5.  **Inicia el servidor de desarrollo:**
+    ```bash
+    npm run dev
+    ```
+
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación en funcionamiento.
+
