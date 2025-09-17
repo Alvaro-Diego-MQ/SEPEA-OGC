@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 
-// 📌 Esquema de validación con Zod
+// Esquema de validación con Zod (sin cambios)
 const formSchema = z.object({
   username: z.string().min(1, { message: "El nombre de usuario es requerido." }),
   password: z.string().min(1, { message: "La contraseña es requerida." }),
@@ -31,19 +31,15 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  // 📌 Configuración de react-hook-form con Zod
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { username: "", password: "" },
   });
 
-  // 📌 Manejo del submit
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     setAuthError(null);
-
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulación
-
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     if (values.username === "1234" && values.password === "1234") {
       router.push("/Autoevaluacion");
     } else {
@@ -53,11 +49,13 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-white">
+    // CAMBIO: Usa el color de fondo del tema
+    <div className="flex flex-col md:flex-row h-screen bg-background">
       {/* 📌 Formulario */}
       <div className="w-full md:w-1/2 lg:w-1/3 flex items-center justify-center p-4 md:p-8 lg:p-12">
         <div className="w-full max-w-sm">
-          <Card className="shadow-xl rounded-2xl border border-gray-200 md:border-none md:shadow-none animate-fadeIn">
+          {/* CAMBIO: Usa los colores de la Card del tema. No necesita borde explícito */}
+          <Card className="shadow-xl rounded-2xl md:border-none md:shadow-none animate-fadeIn bg-card">
             <CardContent className="p-6 md:p-0 space-y-6">
               {/* 📌 Encabezado */}
               <div className="text-center transition-all duration-700 ease-out">
@@ -66,10 +64,11 @@ export default function LoginForm() {
                   alt="OGC Logo"
                   className="h-20 mx-auto mb-6 animate-fadeIn"
                 />
-                <h1 className="text-2xl md:text-3xl font-semibold text-gray-900">
+                {/* CAMBIO: Usa los colores de texto del tema */}
+                <h1 className="text-2xl md:text-3xl font-semibold text-card-foreground">
                   Bienvenido de Nuevo
                 </h1>
-                <p className="text-gray-500 text-sm md:text-base mt-2">
+                <p className="text-muted-foreground text-sm md:text-base mt-2">
                   Sistema de Evaluación de Programas de Estudio para la
                   Acreditación
                 </p>
@@ -87,15 +86,16 @@ export default function LoginForm() {
                     name="username"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700 text-sm font-medium">
+                        <FormLabel className="text-sm font-medium text-foreground">
                           Usuario
                         </FormLabel>
                         <FormControl>
                           <div className="relative">
-                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            {/* CAMBIO: Se eliminan colores fijos para que el componente Input use los del tema */}
                             <Input
                               placeholder="Ingrese su usuario"
-                              className="pl-10 h-11 text-sm border-gray-300 focus:border-[#009CDE] focus:ring-[#009CDE] transition-all"
+                              className="pl-10 h-11 text-sm transition-all"
                               {...field}
                               disabled={isLoading}
                             />
@@ -112,24 +112,23 @@ export default function LoginForm() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700 text-sm font-medium">
+                        <FormLabel className="text-sm font-medium text-foreground">
                           Contraseña
                         </FormLabel>
                         <FormControl>
                           <div className="relative">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                             <Input
                               type={showPassword ? "text" : "password"}
                               placeholder="Ingrese su contraseña"
-                              className="pl-10 pr-10 h-11 text-sm border-gray-300 focus:border-[#009CDE] focus:ring-[#009CDE] transition-all"
+                              className="pl-10 pr-10 h-11 text-sm transition-all"
                               {...field}
                               disabled={isLoading}
                             />
-                            {/* Toggle ver contraseña */}
                             <button
                               type="button"
                               onClick={() => setShowPassword(!showPassword)}
-                              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
+                              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
                             >
                               {showPassword ? (
                                 <EyeOff className="h-5 w-5" />
@@ -146,15 +145,17 @@ export default function LoginForm() {
 
                   {/* Error de autenticación */}
                   {authError && (
-                    <p className="text-sm font-medium text-red-600 text-center animate-fadeIn">
+                    // CAMBIO: Usa el color 'destructive' para errores
+                    <p className="text-sm font-medium text-destructive text-center animate-fadeIn">
                       {authError}
                     </p>
                   )}
 
                   {/* Botón submit */}
+                  {/* CAMBIO: El botón ahora usa los colores primarios del tema */}
                   <Button
                     type="submit"
-                    className="w-full bg-[#009CDE] hover:bg-blue-700 text-white font-semibold py-3 text-sm md:text-base rounded-lg shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-95"
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 text-sm md:text-base rounded-lg shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-95"
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -173,7 +174,7 @@ export default function LoginForm() {
         </div>
       </div>
 
-      {/* 📌 Imagen lateral */}
+      {/* 📌 Imagen lateral (sin cambios) */}
       <div className="hidden md:block md:w-1/2 lg:w-2/3 relative animate-fadeIn">
         <Image
           src="/unapuno.jpg"
@@ -182,7 +183,7 @@ export default function LoginForm() {
           className="object-cover filter grayscale-[20%] transition-all duration-700"
           priority
         />
-        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/30 to-black/10"></div>
       </div>
     </div>
   );
